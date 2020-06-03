@@ -11,7 +11,7 @@ const MovieDetailPage = (props) => {
   const [LoadingForMovie, setLoadingForMovie] = useState(true);
   const [LoadingForCasts, setLoadingForCasts] = useState(true);
   const [ActorToggle, setActorToggle] = useState(false);
-  const [Casts, setCasts] = useState([])
+  const [Casts, setCasts] = useState([]);
 
   const movieId = props.match.params.movieId;
   useEffect(() => {
@@ -34,8 +34,9 @@ const MovieDetailPage = (props) => {
     fetch(endpointCrew)
       .then((result) => result.json())
       .then((result) => {
-        setCasts(result);
-        setLoadingForCasts(false)
+          console.log(result)
+        setCasts(result.cast);
+        setLoadingForCasts(false);
       })
       .catch((error) => console.error("Error: ", error));
   };
@@ -53,7 +54,9 @@ const MovieDetailPage = (props) => {
           title={Movie.original_title}
           text={Movie.overview}
         />
-      ) : <Spin/>}
+      ) : (
+        <Spin />
+      )}
       {/*Dodaj do ulubionych*/}
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <button>Dodaj do ulubionych</button>
@@ -74,7 +77,8 @@ const MovieDetailPage = (props) => {
                   <GridCards
                     actor
                     image={cast.profile_path}
-                    characterName={cast.characterName}
+                    character={cast.character}
+                    name={cast.name}
                   />
                 )
             )
