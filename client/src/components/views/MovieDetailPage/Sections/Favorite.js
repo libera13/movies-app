@@ -34,10 +34,26 @@ const Favorite = (props) => {
 
   const handleClickFavorite = () => {
     if (Favorited) {
+
+      // when added
+      axios.post("/api/favorite/removeFromFavorite", variables).then((response) => {
+        if (response.data.success) {
+          setFavoriteNumber(FavoriteNumber - 1);
+          setFavorited(!Favorited);
+        } else {
+          alert("Nie udało się usunąć z ulubionych");
+        }
+      });
+
     } else {
-
-      axios.post("/api/favorite/addToFavorite")
-
+      axios.post("/api/favorite/addToFavorite", variables).then((response) => {
+        if (response.data.success) {
+          setFavoriteNumber(FavoriteNumber + 1);
+          setFavorited(!Favorited);
+        } else {
+          alert("Nie udało się dodać do ulubionych");
+        }
+      });
     }
   };
 

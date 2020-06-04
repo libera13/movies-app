@@ -12,7 +12,7 @@ router.post("/favoriteNumber", (req, res) => {
   // find favorite by movie id
   Favorite.find({ movieId: req.body.movieId }).exec((err, favorite) => {
     if (err) return res.status(400).send(err);
-    res.status(200).json({ success: true, favoriteNumber: favorite.length });
+    return res.status(200).json({ success: true, favoriteNumber: favorite.length });
   });
 });
 
@@ -26,10 +26,32 @@ router.post("/favorited", (req, res) => {
 
     // check if this movie is already favorited
     let result = false;
-    if(favorited.length !== 0) {
-        result = true
+    if (favorited.length !== 0) {
+      result = true;
     }
-    res.status(200).json({ success: true, favorited: result });
+    return res.status(200).json({ success: true, favorited: result });
+  });
+});
+
+router.post("/addToFavorite", auth, (req, res) => {
+  // save the information about the movie or user Id inside favorite collection
+  const favorite = new Favorite(req.body);
+
+  favorite.save((err, doc) => {
+    if (err) return res.status(400).send({ success: false, err });
+    return res.status(200).json({ success: true });
+  });
+});
+
+router.post("/removeFromFavorite", auth, (req, res) => {
+  // delete favorite
+
+  Favorite.findOneAndDelete({
+    movieId: req.body.movieId,
+    userFrom: req.body.userFrom,
+  }).exec((err, doc) => {
+    if (err) return res.status(400).send({ success: false, err });
+    return res.status(200).json({ success: true, doc });
   });
 });
 
