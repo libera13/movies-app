@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import {Button} from "antd";
 const Favorite = (props) => {
   const { userFrom, movieInfo, movieId } = props;
 
@@ -59,10 +60,10 @@ const Favorite = (props) => {
 
   return (
     <div style={{ display: "flex", justifyContent: "flex-end" }}>
-      <button onClick={handleClickFavorite}>
+      <Button onClick={handleClickFavorite}>
         {Favorited ? "Usuń z ulubionych" : "Dodaj do ulubionych"}
         {FavoriteNumber}
-      </button>
+      </Button>
     </div>
   );
 };
