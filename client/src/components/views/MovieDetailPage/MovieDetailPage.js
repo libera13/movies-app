@@ -4,6 +4,7 @@ import MainImage from "../LandingPage/Sections/MainImage";
 import { Button, Row, Spin } from "antd";
 import MovieInfo from "./Sections/MovieInfo";
 import GridCards from "../../commons/GridCards";
+import Favorite from "./Sections/Favorite";
 
 const MovieDetailPage = (props) => {
   const [Movie, setMovie] = useState([]);
@@ -11,38 +12,45 @@ const MovieDetailPage = (props) => {
   const [LoadingForMovie, setLoadingForMovie] = useState(true);
   const [LoadingForCasts, setLoadingForCasts] = useState(true);
   const [ActorToggle, setActorToggle] = useState(false);
+  const [CrewToggle, setCrewToggle] = useState(false);
   const [Casts, setCasts] = useState([]);
 
   const movieId = props.match.params.movieId;
   useEffect(() => {
     const endpoint = `${API_URL}movie/${movieId}?api_key=${API_KEY}&language=en-US`;
-    fetchMovies(endpoint);
+    fetchMovie(endpoint);
   }, []);
 
-  const fetchMovies = (endpoint) => {
+  const fetchMovie = (endpoint) => {
     fetch(endpoint)
       .then((result) => result.json())
       .then((result) => {
         setMovie(result);
         setLoadingForMovie(false);
-        const endpointCrew = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`;
-        fetchCrew(endpointCrew);
+        const endpointCasts = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`;
+        fetchCasts(endpointCasts);
       })
       .catch((error) => console.error("Error: ", error));
   };
-  const fetchCrew = (endpointCrew) => {
+  const fetchCasts = (endpointCrew) => {
     fetch(endpointCrew)
       .then((result) => result.json())
       .then((result) => {
-          console.log(result)
         setCasts(result.cast);
+        setCrews(result.crew);
         setLoadingForCasts(false);
       })
       .catch((error) => console.error("Error: ", error));
   };
 
   const toggleActorView = () => {
+    setCrewToggle(false);
+
     setActorToggle(!ActorToggle);
+  };
+  const toggleCrewView = () => {
+    setActorToggle(false);
+    setCrewToggle(!CrewToggle);
   };
 
   return (
@@ -58,16 +66,19 @@ const MovieDetailPage = (props) => {
         <Spin />
       )}
       {/*Dodaj do ulubionych*/}
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <button>Dodaj do ulubionych</button>
-      </div>
+      <Favorite
+        userFrom={localStorage.getItem("userId")}
+        movieId={movieId}
+        movieInfo={Movie}
+      />
       {/*Movie info table*/}
       <MovieInfo movie={Movie} />
-      {/*Pokaz aktorow*/}
+      {/*Pokaz aktorow i obsade*/}
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Button onClick={toggleActorView}>Pokaż aktorów</Button>
+        <Button onClick={toggleCrewView}>Pokaż obsade</Button>
       </div>
-      {/*Grid Cards for Crews*/}
+      {/*Grid Cards for Casts*/}
       {ActorToggle && (
         <Row gutter={[16, 16]}>
           {!LoadingForCasts ? (
@@ -83,7 +94,28 @@ const MovieDetailPage = (props) => {
                 )
             )
           ) : (
-            <div>loading...</div>
+            <Spin />
+          )}
+        </Row>
+      )}
+
+      {/*Grid Cards for Casts*/}
+      {CrewToggle && (
+        <Row gutter={[16, 16]}>
+          {!LoadingForCasts ? (
+            Crews.map(
+              (crew, index) =>
+                crew.profile_path && (
+                  <GridCards
+                    crew
+                    image={crew.profile_path}
+                    job={crew.job}
+                    name={crew.name}
+                  />
+                )
+            )
+          ) : (
+            <Spin />
           )}
         </Row>
       )}
