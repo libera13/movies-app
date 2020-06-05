@@ -1,18 +1,54 @@
+React Movies-app
+============
+
+This is a React movie application powered by MERN stack (MongoDB, Express, React and Node.js) that provides the main functions which is browsing the most popular movies with adding them to the list of favorites
 
 
-By uruchomić aplikację, wykonaj następujące kroki:
-1. Wpisz " npm install " wewnątrz katalogu root
-2. Wpisz " npm install " wewnątrz katalogu client
-3. Wpisz " npm run dev " wewnątrz katalogu root
+## Home
+![App Preview](https://github.com/libera13/movies-app/blob/master/client/src/img/landing-page.png?raw=true)
+
+## Movie details
+![App Preview](https://github.com/libera13/movies-app/blob/master/client/src/img/detail-page.png?raw=true)
+
+## Favorite list
+
+![App Preview](https://github.com/libera13/movies-app/blob/master/client/src/img/favorite-page.png?raw=true)
+
+---
+
+## Features
+- List of the recently popular movies
+- Details of movies
+- Add to favorites
+- Delete from favorites
+- Translate movie overview to polish
+- Other awesome features yet to be implemented
 
 
-Api z którego korzysta aplikacja:
+## Setup
+To use this application,
 
-https://developers.themoviedb.org - baza filmów
+1. Clone this repo to your desktop and run `npm install` to install all the dependencies.
+2. Type " npm install " inside the root directory ( Download Server Dependencies )
+3. Type " npm install " inside the client directory ( Download Front-end Dependencies )
+3. Type "npm run dev" inside the root directory
 
-https://platform.systran.net - tłumaczenia
+You might want to look into `config.json` to make change the port you want to use.
 
-Do budowy aplikacji skorzystałem z: Boilerplate for REACT JS, MONG DB, EXPRESS JS, REDUX
+---
+
+
+## Built with
+
+- MERN stack provides rapid development of small applications with front and backend.
+- Ant Design - high quality components and demos for building rich, interactive user interfaces.
+
+Api used by the application:
+
+https://developers.themoviedb.org - movie database
+
+https://platform.systran.net - translations
+
+To build the application I used: Boilerplate for REACT JS, MONG DB, EXPRESS JS, REDUX
  
- https://github.com/jaewonhimnae/boilerplate-mern-stack
-
+https://github.com/jaewonhimnae/boilerplate-mern-stack
