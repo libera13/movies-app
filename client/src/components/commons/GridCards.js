@@ -1,8 +1,8 @@
 import React from "react";
-import { Card, Avatar, Col, Typography, Row } from "antd";
-import { IMAGE_BASE_URL } from "../Config";
+import GridCardsActors from "./Sections/GridCardsActors";
+import GridCardsCrew from "./Sections/GridCardsCrew";
+import GridCardsMovies from "./Sections/GridCardsMovies";
 
-const { Text } = Typography;
 function GridCards(props) {
   let {
     actor,
@@ -20,55 +20,35 @@ function GridCards(props) {
   if (actor) {
     // FOR ACTORS
     return (
-      <Col key={key} lg={6} md={8} xs={24} align="center">
-        <div style={{ position: "relative" }}>
-          <img
-            style={{ width: "100%", height: "320px" }}
-            alt={character}
-            src={`${IMAGE_BASE_URL}${POSTER_SIZE}${image}`}
-          />
-        </div>
-        <div>
-          <Text>
-            {name} <br />
-            as {character}
-          </Text>
-        </div>
-      </Col>
+      <GridCardsActors
+        key={key}
+        character={character}
+        POSTER_SIZE={POSTER_SIZE}
+        image={image}
+        name={name}
+      />
     );
   } else if (crew) {
     // FOR CREW
     return (
-      <Col key={key} lg={6} md={8} xs={24} align="center">
-        <div style={{ position: "relative" }}>
-          <img
-            style={{ width: "100%", height: "320px" }}
-            alt={character}
-            src={`${IMAGE_BASE_URL}${POSTER_SIZE}${image}`}
-          />
-        </div>
-        <div>
-          <Text>
-            {name} <br />
-            {job}
-          </Text>
-        </div>
-      </Col>
+      <GridCardsCrew
+        key={key}
+        character={character}
+        POSTER_SIZE={POSTER_SIZE}
+        image={image}
+        name={name}
+        job={job}
+      />
     );
   } else {
     // FOR LANDING PAGE
     return (
-      <Col key={key} lg={6} md={8} xs={24}>
-        <div style={{ position: "relative" }}>
-          <a href={`/movie/${movieId}`}>
-            <img
-              style={{ width: "100%", height: "320px" }}
-              alt={movieName}
-              src={image}
-            />
-          </a>
-        </div>
-      </Col>
+      <GridCardsMovies
+        key={key}
+        movieId={movieId}
+        movieName={movieName}
+        image={image}
+      />
     );
   }
 }

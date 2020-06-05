@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  API_KEY,
-  API_URL,
-  IMAGE_BASE_URL,
-  IMAGE_SIZE,
-  USER_SERVER,
-} from "../../Config";
+import { API_KEY, API_URL, IMAGE_BASE_URL, IMAGE_SIZE } from "../../Config";
 import MainImage from "../LandingPage/Sections/MainImage";
 import { Button, Row, Spin } from "antd";
 import MovieInfo from "./Sections/MovieInfo";
@@ -36,7 +30,6 @@ const MovieDetailPage = (props) => {
       .then((result) => result.json())
       .then((result) => {
         setMovie(result);
-        console.log(result);
         setMovieOverview(result.overview);
         setLoadingForMovie(false);
         const endpointCasts = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`;
@@ -117,12 +110,18 @@ const MovieDetailPage = (props) => {
         <Spin />
       )}
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <div style={{ display: "flex", width:"50%", justifyContent: "space-around" }}>
-          {/*Button do tlumaczenia opisu*/}
+        <div
+          style={{
+            display: "flex",
+            width: "50%",
+            justifyContent: "space-around",
+          }}
+        >
+          {/* Translate button*/}
           <Button onClick={handleTranslateButton}>
             {IsTranslated ? "wróć do wersji angielskiej" : "Tłumacz opis"}
           </Button>
-          {/*Dodaj do ulubionych*/}
+          {/* Favorite button*/}
           <Favorite
             userFrom={localStorage.getItem("userId")}
             movieId={movieId}
@@ -130,9 +129,9 @@ const MovieDetailPage = (props) => {
           />
         </div>
       </div>
-      {/*Movie info table*/}
+      {/* MovieInfo table */}
       <MovieInfo movie={Movie} />
-      {/*Pokaz aktorow i obsade*/}
+      {/* Buttons for actors and crew */}
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Button onClick={toggleActorView}>Pokaż aktorów</Button>
         <Button onClick={toggleCrewView}>Pokaż obsade</Button>

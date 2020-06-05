@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
-import { Button } from "antd";
-import { AiOutlineHeart } from "react-icons/ai";
+import {Button} from "antd";
+import {AiOutlineHeart} from "react-icons/ai";
 
 const Favorite = (props) => {
   const { userFrom, movieInfo, movieId } = props;

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import {Container, StyledA, StyledTable, StyledTd, StyledTh} from "./style";
 import axios from "axios";
-import { Popover, Spin, Typography } from "antd";
-import { IMAGE_BASE_URL, POSTER_SIZE } from "../../Config";
-import { useSelector } from "react-redux";
-import { FiExternalLink } from "react-icons/fi";
+import {Popover, Spin, Typography} from "antd";
+import {IMAGE_BASE_URL, POSTER_SIZE} from "../../Config";
+import {useSelector} from "react-redux";
 
 const { Title } = Typography;
 
@@ -22,7 +21,6 @@ const FavoritePage = () => {
   const fetchFavoredMovie = () => {
     axios.post("/api/favorite/getFavoredMovie", variable).then((response) => {
       if (response.data.success) {
-        console.log(response.data.favorites);
         setFavorites(response.data.favorites);
         setLoading(false);
       } else {

@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Typography, Row } from "antd";
+import React, {useEffect, useState} from "react";
+import {Row, Spin, Typography} from "antd";
 
-import { FaCode } from "react-icons/fa";
-import {
-  API_KEY,
-  API_URL,
-  IMAGE_SIZE,
-  IMAGE_BASE_URL,
-  POSTER_SIZE,
-} from "../../Config";
+import {API_KEY, API_URL, IMAGE_BASE_URL, IMAGE_SIZE, POSTER_SIZE,} from "../../Config";
 import MainImage from "./Sections/MainImage";
 import GridCards from "../../commons/GridCards";
 
 const { Title } = Typography;
 function LandingPage() {
   const [Movies, setMovies] = useState([]);
-  const [Loading, setLoading] = useState(true);
   const [MainMovieImage, setMainMovieImage] = useState(null);
-  const [CurrentPage, setCurrentPage] = useState(null);
+  const [CurrentPage, setCurrentPage] = useState(0);
+  const [Loading, setLoading] = useState(true);
 
   useEffect(() => {
     const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
@@ -31,8 +24,8 @@ function LandingPage() {
         setMovies([...Movies, ...result.results]);
         setMainMovieImage(MainMovieImage || result.results[0]);
         setCurrentPage(result.page);
-        console.log(result);
-      }, setLoading(false))
+        setLoading(false);
+      })
       .catch((error) => console.error("Error: ", error));
   };
 
@@ -47,9 +40,9 @@ function LandingPage() {
     <div style={{ width: "100%", margin: "0" }}>
       {MainMovieImage && (
         <MainImage
-          image={`${IMAGE_BASE_URL}${IMAGE_SIZE}${Movies[0].backdrop_path}`}
-          title={Movies[0].original_title}
-          text={Movies[0].overview}
+          image={`${IMAGE_BASE_URL}${IMAGE_SIZE}${MainMovieImage.backdrop_path}`}
+          title={MainMovieImage.original_title}
+          text={MainMovieImage.overview}
         />
       )}
 
@@ -73,7 +66,7 @@ function LandingPage() {
             ))}
         </Row>
 
-        {/*{loadMoreItems && <div>ładowanie...</div>}*/}
+        {Loading && <Spin/>}
 
         <br />
         <div style={{ display: "flex", justifyContent: "center" }}>

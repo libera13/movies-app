@@ -12,7 +12,9 @@ router.post("/favoriteNumber", (req, res) => {
   // find favorite by movie id
   Favorite.find({ movieId: req.body.movieId }).exec((err, favorite) => {
     if (err) return res.status(400).send(err);
-    return res.status(200).json({ success: true, favoriteNumber: favorite.length });
+    return res
+      .status(200)
+      .json({ success: true, favoriteNumber: favorite.length });
   });
 });
 
@@ -23,7 +25,6 @@ router.post("/favorited", (req, res) => {
     userFrom: req.body.userFrom,
   }).exec((err, favorited) => {
     if (err) return res.status(400).send(err);
-
     // check if this movie is already favorited
     let result = false;
     if (favorited.length !== 0) {
@@ -34,7 +35,7 @@ router.post("/favorited", (req, res) => {
 });
 
 router.post("/addToFavorite", auth, (req, res) => {
-  // save the information about the movie or user Id inside favorite collection
+  // save the information about the movie and user Id inside favorite collection
   const favorite = new Favorite(req.body);
 
   favorite.save((err, doc) => {
@@ -45,7 +46,6 @@ router.post("/addToFavorite", auth, (req, res) => {
 
 router.post("/removeFromFavorite", auth, (req, res) => {
   // delete favorite
-
   Favorite.findOneAndDelete({
     movieId: req.body.movieId,
     userFrom: req.body.userFrom,
@@ -56,11 +56,10 @@ router.post("/removeFromFavorite", auth, (req, res) => {
 });
 
 router.post("/getFavoredMovie", (req, res) => {
-  Favorite.find({ 'userFrom': req.body.userFrom })
-      .exec((err, favorites) => {
-        if (err) return res.status(400).send(err);
-        return res.status(200).json({ success: true, favorites })
-      })
+  Favorite.find({ userFrom: req.body.userFrom }).exec((err, favorites) => {
+    if (err) return res.status(400).send(err);
+    return res.status(200).json({ success: true, favorites });
+  });
 });
 
 module.exports = router;
