@@ -28,7 +28,7 @@ This is a React movie application powered by MERN stack (MongoDB, Express, React
 ## Setup
 To use this application,
 
-1. Clone this repo to your desktop and run `npm install` to install all the dependencies.
+1. Clone this repo to your desktop
 2. Type " npm install " inside the root directory ( Download Server Dependencies )
 3. Type " npm install " inside the client directory ( Download Front-end Dependencies )
 3. Type "npm run dev" inside the root directory
