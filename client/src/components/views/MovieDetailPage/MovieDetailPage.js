@@ -36,6 +36,7 @@ const MovieDetailPage = (props) => {
       .then((result) => result.json())
       .then((result) => {
         setMovie(result);
+        console.log(result);
         setMovieOverview(result.overview);
         setLoadingForMovie(false);
         const endpointCasts = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`;

@@ -1,16 +1,18 @@
-Hello, My Friends  
-Thank you for Having interest in this repository ! 
-
-To use this application, 
-
-1. make dev.js file inside config folder 
-2. put mongoDB info into dev.js file 
-3. Type  " npm install " inside the root directory  ( Download Server Dependencies ) 
-4. Type " npm install " inside the client directory ( Download Front-end Dependencies )
 
 
-If you have problem, feel free to ask me ^^ 
+By uruchomić aplikację, wykonaj następujące kroki:
+1. Wpisz " npm install " wewnątrz katalogu root
+2. Wpisz " npm install " wewnątrz katalogu client
+3. Wpisz " npm run dev " wewnątrz katalogu root
 
- You can watch the tutorial for this app.
 
-https://www.youtube.com/channel/UCFyXA9x8lpL3EYWeYhj4C4Q?view_as=subscriber
+Api z którego korzysta aplikacja:
+
+https://developers.themoviedb.org - baza filmów
+
+https://platform.systran.net - tłumaczenia
+
+Do budowy aplikacji skorzystałem z: Boilerplate for REACT JS, MONG DB, EXPRESS JS, REDUX
+ 
+ https://github.com/jaewonhimnae/boilerplate-mern-stack
+

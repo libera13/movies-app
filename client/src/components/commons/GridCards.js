@@ -48,7 +48,7 @@ function GridCards(props) {
         <div>
           <Text>
             {name} <br />
-            as {job}
+            {job}
           </Text>
         </div>
       </Col>

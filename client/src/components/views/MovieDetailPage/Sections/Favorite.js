@@ -12,7 +12,7 @@ const Favorite = (props) => {
     movieId: movieId,
     movieTitle: movieInfo.original_title,
     movieImage: movieInfo.backdrop_path,
-    movieRunTime: movieInfo.movieRunTime,
+    movieRunTime: movieInfo.runtime,
   };
 
   useEffect(() => {
