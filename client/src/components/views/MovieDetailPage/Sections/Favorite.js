@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {Button} from "antd";
+import { Button } from "antd";
+import { AiOutlineHeart } from "react-icons/ai";
+
 const Favorite = (props) => {
   const { userFrom, movieInfo, movieId } = props;
 
@@ -35,17 +37,17 @@ const Favorite = (props) => {
 
   const handleClickFavorite = () => {
     if (Favorited) {
-
       // when added
-      axios.post("/api/favorite/removeFromFavorite", variables).then((response) => {
-        if (response.data.success) {
-          setFavoriteNumber(FavoriteNumber - 1);
-          setFavorited(!Favorited);
-        } else {
-          alert("Nie udało się usunąć z ulubionych");
-        }
-      });
-
+      axios
+        .post("/api/favorite/removeFromFavorite", variables)
+        .then((response) => {
+          if (response.data.success) {
+            setFavoriteNumber(FavoriteNumber - 1);
+            setFavorited(!Favorited);
+          } else {
+            alert("Nie udało się usunąć z ulubionych");
+          }
+        });
     } else {
       axios.post("/api/favorite/addToFavorite", variables).then((response) => {
         if (response.data.success) {
@@ -61,8 +63,9 @@ const Favorite = (props) => {
   return (
     <div style={{ display: "flex", justifyContent: "flex-end" }}>
       <Button onClick={handleClickFavorite}>
-        {Favorited ? "Usuń z ulubionych" : "Dodaj do ulubionych"}
+        <AiOutlineHeart />
         {FavoriteNumber}
+        {Favorited ? "  Usuń" : "  Dodaj"}
       </Button>
     </div>
   );

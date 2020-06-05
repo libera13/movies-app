@@ -73,7 +73,7 @@ function LandingPage() {
             ))}
         </Row>
 
-        {loadMoreItems && <div>ładowanie...</div>}
+        {/*{loadMoreItems && <div>ładowanie...</div>}*/}
 
         <br />
         <div style={{ display: "flex", justifyContent: "center" }}>

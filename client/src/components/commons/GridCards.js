@@ -18,6 +18,7 @@ function GridCards(props) {
   const POSTER_SIZE = "w154";
 
   if (actor) {
+    // FOR ACTORS
     return (
       <Col key={key} lg={6} md={8} xs={24} align="center">
         <div style={{ position: "relative" }}>
@@ -36,6 +37,7 @@ function GridCards(props) {
       </Col>
     );
   } else if (crew) {
+    // FOR CREW
     return (
       <Col key={key} lg={6} md={8} xs={24} align="center">
         <div style={{ position: "relative" }}>
@@ -54,6 +56,7 @@ function GridCards(props) {
       </Col>
     );
   } else {
+    // FOR LANDING PAGE
     return (
       <Col key={key} lg={6} md={8} xs={24}>
         <div style={{ position: "relative" }}>
